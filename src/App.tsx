@@ -14,10 +14,7 @@ export const App = () => {
   useEffect(() => {
     setIsTodosLoading(true);
     getTodos()
-      .then(data => dispatch(todosAction.setTodos(data)))
-      .catch(error => {
-        throw error;
-      })
+      .then(todosData => dispatch(todosAction.setTodos(todosData)))
       .finally(() => {
         setIsTodosLoading(false);
       });

@@ -5,7 +5,6 @@ import { Todo } from '../../types/Todo';
 import { Status } from '../../types/Status';
 import { setCurrentTodo } from '../../features/currentTodo';
 
-
 function filterTodos(
   todos: Todo[],
   { query, status }: { query: string; status: Status },
@@ -20,22 +19,22 @@ function filterTodos(
 }
 
 export const TodoList: React.FC = () => {
-    const dispatch = useAppDispatch();
-    const todos = useAppSelector(state => state.todos);
-    const currentTodo = useAppSelector(state => state.currentTodo);
-    const { query, status } = useAppSelector(state => state.filter);
-let preparedTodos;
- if (query || status !== 'all') {
-   preparedTodos = filterTodos(todos, { query, status });
- } else {
-   preparedTodos = [...todos];
- }
-    const handleSelectTodo = (todo: Todo) => {
-      dispatch(setCurrentTodo(todo));
-    };
+  const dispatch = useAppDispatch();
+  const todos = useAppSelector(state => state.todos);
+  const currentTodo = useAppSelector(state => state.currentTodo);
+  const { query, status } = useAppSelector(state => state.filter);
+  let preparedTodos;
+  if (query || status !== 'all') {
+    preparedTodos = filterTodos(todos, { query, status });
+  } else {
+    preparedTodos = [...todos];
+  }
+  const handleSelectTodo = (todo: Todo) => {
+    dispatch(setCurrentTodo(todo));
+  };
   return (
     <>
-      {preparedTodos.length === 0 && query ? (
+      {(preparedTodos.length === 0 && query) || !status || !todos ? (
         <p className="notification is-warning">
           There are no todos matching current filter criteria
         </p>
