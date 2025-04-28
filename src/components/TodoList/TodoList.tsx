@@ -34,7 +34,7 @@ export const TodoList: React.FC = () => {
   };
   return (
     <>
-      {(preparedTodos.length === 0 && query) || !status || !todos ? (
+      {preparedTodos.length === 0 ? (
         <p className="notification is-warning">
           There are no todos matching current filter criteria
         </p>
